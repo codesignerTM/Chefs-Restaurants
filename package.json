@@ -1,0 +1,7 @@
+{
+  "name": "ywa",
+  "version": "yes",
+  "description": "TypeScript/React/GraphQL",
+  "main": "index.js",
+  "license": "MIT"
+}
