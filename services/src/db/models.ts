@@ -1,11 +1,11 @@
 import {
   BelongsTo,
   Column,
-  DataType,
-  ForeignKey,
-  HasMany,
-  Model,
   Table,
+  DataType,
+  Model,
+  HasMany,
+  ForeignKey,
 } from "sequelize-typescript";
 
 @Table({
@@ -42,7 +42,6 @@ export class Chef extends Model<Chef> {
   tableName: "reataurants",
 })
 export class Restaurant extends Model<Restaurant> {
-
   @Column({
     allowNull: false,
     autoIncrement: true,
@@ -55,7 +54,6 @@ export class Restaurant extends Model<Restaurant> {
     allowNull: false,
     type: DataType.INTEGER.UNSIGNED,
   })
-
   @ForeignKey(() => Chef)
   chefId!: string;
 

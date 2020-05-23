@@ -18,12 +18,3 @@ const typeDefs = gql`
 `;
 
 export default typeDefs;
-
-
-/*
-  EXP on [Restaurant!]!
-  Would be valid if:
-  [Restaurant] => null, [null]
-  [Restaurant!] => null
-  [Restaurant]! => [null]
-*/

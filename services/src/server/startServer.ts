@@ -2,13 +2,9 @@ import { ApolloServer } from "apollo-server-express";
 import * as cors from "cors";
 import * as express from "express";
 
-import resolvers from "#root/graphql/resolvers";
-import typeDefs from "#root/graphql/typeDefs";
 import accessEnv from "#root/helpers/accessEnv";
 
 const PORT = accessEnv("PORT", 7000);
-
-const appolloServer = new ApolloServer({ resolvers, typeDefs });
 
 const app = express();
 
@@ -25,8 +21,6 @@ app.use(
     optionsSuccessStatus: 200,
   })
 );
-
-appolloServer.applyMiddleware({ app, path: "/graphql" });
 
 app.listen(PORT, "0.0.0.0", () => {
   console.info(`GraphQL service listening on ${PORT}`);
