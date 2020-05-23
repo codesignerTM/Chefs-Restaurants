@@ -1,3 +1,3 @@
-import { Chefs } from "./Chefs";
+import Chefs from "./Chefs";
 
 export default Chefs;
