@@ -1,0 +1,11 @@
+{
+    "compileOnSave": true,
+    "compilerOptions": {
+        "allowJs": true,
+        "baseUrl": ".",
+        "jsx": "react",
+        "module": "commonjs",
+        "strict": true,
+        "target": "es6",
+    }
+}
