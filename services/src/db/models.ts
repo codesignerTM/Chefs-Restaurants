@@ -5,28 +5,28 @@ import {
   ForeignKey,
   HasMany,
   Model,
-  Table,
+  Table
 } from "sequelize-typescript";
 
 @Table({
   defaultScope: {
-    attributes: { exclude: ["deletedAt"] },
+    attributes: { exclude: ["deletedAt"] }
   },
   paranoid: true,
-  tableName: "chefs",
+  tableName: "chefs"
 })
 export class Chef extends Model<Chef> {
   @Column({
     allowNull: false,
     autoIncrement: true,
     primaryKey: true,
-    type: DataType.INTEGER.UNSIGNED,
+    type: DataType.INTEGER.UNSIGNED
   })
   id!: string;
 
   @Column({
     allowNull: false,
-    type: DataType.STRING,
+    type: DataType.STRING
   })
   name!: string;
 
@@ -36,32 +36,30 @@ export class Chef extends Model<Chef> {
 
 @Table({
   defaultScope: {
-    attributes: { exclude: ["deletedAt"] },
+    attributes: { exclude: ["deletedAt"] }
   },
   paranoid: true,
-  tableName: "reataurants",
+  tableName: "restaurants"
 })
 export class Restaurant extends Model<Restaurant> {
-
   @Column({
     allowNull: false,
     autoIncrement: true,
     primaryKey: true,
-    type: DataType.INTEGER.UNSIGNED,
+    type: DataType.INTEGER.UNSIGNED
   })
   id!: string;
 
   @Column({
     allowNull: false,
-    type: DataType.INTEGER.UNSIGNED,
+    type: DataType.INTEGER.UNSIGNED
   })
-
   @ForeignKey(() => Chef)
   chefId!: string;
 
   @Column({
     allowNull: false,
-    type: DataType.STRING,
+    type: DataType.STRING
   })
   name!: string;
 

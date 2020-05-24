@@ -1,5 +1,4 @@
 import { Chef, Restaurant } from "#root/db/models";
-import { where } from "sequelize/types";
 
 const resolvers = {
     restaurants: (chef: Chef) => {
