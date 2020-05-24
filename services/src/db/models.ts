@@ -20,7 +20,7 @@ export class Chef extends Model<Chef> {
     allowNull: false,
     autoIncrement: true,
     primaryKey: true,
-    type: DataType.INTEGER.UNSIGNED
+    type: DataType.INTEGER.UNSIGNED,
   })
   id!: string;
 
