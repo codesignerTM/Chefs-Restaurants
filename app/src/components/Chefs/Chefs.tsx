@@ -63,8 +63,8 @@ const Chefs: React.FC<Props> = () => {
 
     return (
         <Wrapper>
-            {data && data.chefs.map(chef => {
-                <Chef key={chef.id}>
+            {data && data.chefs.map(chef => (
+                <div key={chef.id}>
                     <ChefName>{chef.name} </ChefName>
                     <Restaurants>
                         {chef.restaurants.map(restaurant => (
@@ -73,10 +73,8 @@ const Chefs: React.FC<Props> = () => {
                             </ Restaurant>
                         ))}
                     </Restaurants>
-                </Chef>
-            })
-
-            }
+                </div>
+            ))}
         </Wrapper>
 
     );
