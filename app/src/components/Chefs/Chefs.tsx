@@ -1,7 +1,9 @@
 import * as React from 'react';
 import gql from "graphql-tag";
-import { useQuery } from "@apollo/react-hooks";
+import { useQuery, useMutation } from "@apollo/react-hooks";
 import styled from "styled-components";
+
+import AddRestaurant from './AddRestaurant';
 
 interface Props { }
 interface Restaurant {
@@ -54,10 +56,25 @@ const query = gql`
 }
 `;
 
+const createRestaurantMutation = gql`
+mutation($chefId: ID!, $name: String!) {
+    createRestaurant(chefId: $chefId, name: $name) {
+        id
+        name
+    }
+}
+`;
+
 
 const Chefs: React.FC<Props> = () => {
 
-    const { data, loading } = useQuery(query);
+    const { data, loading, refetch } = useQuery(query);
+    const [createRestaurant] = useMutation<{
+        createRestaurant: Restaurant;
+    }, {
+        chefId: string;
+        name: string;
+    }>(createRestaurantMutation);
 
     if (loading) return <h4>"Loading....."</h4>
 
@@ -73,8 +90,16 @@ const Chefs: React.FC<Props> = () => {
                             </ Restaurant>
                         ))}
                     </Restaurants>
+                    <AddRestaurant 
+                    onAddRestaurant={async ({name}) => {
+                        await createRestaurant({
+                            variables: {chefId: chef.id, name}
+                        });
+                        refetch()
+                    }}
+                    />
                 </div>
-            ))}
+            ))} 
         </Wrapper>
 
     );
