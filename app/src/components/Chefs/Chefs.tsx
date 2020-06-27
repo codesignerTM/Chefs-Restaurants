@@ -3,7 +3,9 @@ import gql from "graphql-tag";
 import { useQuery, useMutation } from "@apollo/react-hooks";
 import styled from "styled-components";
 
+import AddChef from './AddChef';
 import AddRestaurant from './AddRestaurant';
+
 
 interface Props { }
 interface Restaurant {
@@ -65,6 +67,15 @@ mutation($chefId: ID!, $name: String!) {
 }
 `;
 
+const createChefMutation = gql`
+mutation($name: String!) {
+    createChef(name: $name) {
+        id
+        name
+    }
+}
+`;
+
 
 const Chefs: React.FC<Props> = () => {
 
@@ -75,6 +86,12 @@ const Chefs: React.FC<Props> = () => {
         chefId: string;
         name: string;
     }>(createRestaurantMutation);
+
+    const [createChef] = useMutation<{
+        createChef: Chef;
+    }, {
+        name: string;
+    }>(createChefMutation);
 
     if (loading) return <h4>"Loading....."</h4>
 
@@ -89,17 +106,24 @@ const Chefs: React.FC<Props> = () => {
                                 {restaurant.name}
                             </ Restaurant>
                         ))}
+                        <AddRestaurant 
+                             onAddRestaurant={async ({name}) => {
+                                await createRestaurant({
+                                    variables: {chefId: chef.id, name}
+                                });
+                                refetch()
+                            }}
+                        />
                     </Restaurants>
-                    <AddRestaurant 
-                    onAddRestaurant={async ({name}) => {
-                        await createRestaurant({
-                            variables: {chefId: chef.id, name}
-                        });
-                        refetch()
-                    }}
-                    />
                 </div>
-            ))} 
+            ))}
+            <AddChef 
+              onAddChef={async ({name}) => {
+                await createChef({
+                    variables: {name}
+                });
+                refetch()
+            }}/> 
         </Wrapper>
 
     );

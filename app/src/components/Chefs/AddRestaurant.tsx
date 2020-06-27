@@ -43,7 +43,7 @@ const AddRestaurant = ({onAddRestaurant: pushAddRestaurant}: AddRestaurantProp) 
 
     const [isAdding, setIsAdding] = useState(false);
 
-    const {formState: {isValid}, handleSubmit, register, reset} = useForm({mode: "onChange"});
+    const {formState: {isSubmitting, isValid}, handleSubmit, register, reset} = useForm({mode: "onChange"});
 
     if(!isAdding) {
         return (
@@ -59,13 +59,13 @@ const AddRestaurant = ({onAddRestaurant: pushAddRestaurant}: AddRestaurantProp) 
         await pushAddRestaurant({name});
         reset();
         setIsAdding(false);
-    })
+    });
 
     return (
         <Wrapper>
             <form onSubmit={onSubmit}>
-                <TextField autoFocus name="name" type="text" ref={register({required: true})} />
-                <button disabled={!isValid} type="submit"> Add </button>
+                <TextField disabled={isSubmitting} autoFocus name="name" type="text" ref={register({required: true})} />
+                <button disabled={isSubmitting || !isValid} type="submit"> Add </button>
             </form>
         </Wrapper>
     )
