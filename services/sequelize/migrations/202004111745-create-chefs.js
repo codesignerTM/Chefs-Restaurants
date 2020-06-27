@@ -5,7 +5,7 @@ module.exports.up = (queryInterface, DataTypes) => {
     {
       id: {
         allowNull: false,
-        autoIncerement: true,
+        autoIncrement: true,
         primaryKey: true,
         type: DataTypes.INTEGER.UNSIGNED,
       },
